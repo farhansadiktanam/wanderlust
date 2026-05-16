@@ -35,14 +35,17 @@ const EditDestination = ({ destinationDetails }) => {
 
     const { data: tokenData } = await authClient.token();
 
-    const res = await fetch(`http://localhost:5000/destinations/${_id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${tokenData}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/destinations/${_id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData}`,
+        },
+        body: JSON.stringify(destinations),
       },
-      body: JSON.stringify(destinations),
-    });
+    );
     const data = await res.json();
 
     console.log(data);

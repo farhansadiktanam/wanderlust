@@ -18,13 +18,16 @@ const AddDestinations = () => {
     const destinations = Object.fromEntries(formData.entries());
     console.log(destinations);
 
-    const res = await fetch("http://localhost:5000/destinations", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/destinations`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(destinations),
       },
-      body: JSON.stringify(destinations),
-    });
+    );
     const data = await res.json();
 
     console.log(data);

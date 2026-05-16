@@ -7,7 +7,7 @@ const DeleteDestination = ({ destinationDetails }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      `http://localhost:5000/destinations/${destinationDetails._id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/destinations/${destinationDetails._id}`,
       {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },

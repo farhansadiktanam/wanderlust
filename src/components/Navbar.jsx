@@ -32,7 +32,7 @@ const Navbar = () => {
 
       <div>
         <Image
-          src={"/assets/wanderlast.png"}
+          src={"/assets/Wanderlast.png"}
           alt="WanderlastLogo"
           width={150}
           sizes="lg"

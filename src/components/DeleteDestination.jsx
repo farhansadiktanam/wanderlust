@@ -1,8 +1,8 @@
 "use client";
 
 import { AlertDialog, Button } from "@heroui/react";
-import { redirect } from "next/dist/server/api-utils";
-import { Router } from "next/router";
+import { redirect } from "next/navigation";
+
 const DeleteDestination = ({ destinationDetails }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -15,6 +15,7 @@ const DeleteDestination = ({ destinationDetails }) => {
     );
     const deleteDestination = await res.json();
     console.log(deleteDestination);
+    redirect("/destinations");
   };
   return (
     <div>

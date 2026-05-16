@@ -5,10 +5,22 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import EditDestination from "@/components/EditDestination";
 import DeleteDestination from "@/components/DeleteDestination";
+import MyBookings from "@/components/MyBookings";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const res = await fetch(`http://localhost:5000/destinations/${id}`);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  console.log(token);
+
+  const res = await fetch(`http://localhost:5000/destinations/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
   const destinationDetails = await res.json();
 
   return (
@@ -64,11 +76,8 @@ const DestinationDetailsPage = async ({ params }) => {
           </div>
           <div className="flex flex-col items-end gap-2">
             <span className="text-xs text-default-400">
-              Departs: {destinationDetails.departureDate}
+              <MyBookings destinationDetails={destinationDetails} />
             </span>
-            <Button color="primary" size="sm" radius="full">
-              Confirm
-            </Button>
           </div>
         </Card.Footer>
       </Card>
